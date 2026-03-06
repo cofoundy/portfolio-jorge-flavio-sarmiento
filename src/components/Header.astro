@@ -1,0 +1,102 @@
+---
+import { siteConfig } from "../config";
+
+const navItems = [
+  { label: "About", href: "#about" },
+  { label: "Research", href: "#publications" },
+  { label: "Teaching", href: "#teaching" },
+  { label: "Experience", href: "#experience" },
+  { label: "Contact", href: "#contact" },
+];
+---
+
+<!-- Floating pill nav -->
+<header
+  id="floating-nav"
+  class="fixed top-4 left-1/2 -translate-x-1/2 z-50 opacity-0 pointer-events-none transition-all duration-300"
+>
+  <nav class="flex items-center gap-1 px-2 py-1.5 rounded-full bg-white/90 backdrop-blur-md shadow-lg border border-[var(--color-primary-light)]/30">
+    <span class="text-xs font-bold px-3 text-[var(--color-primary-dark)] tracking-wide hidden sm:inline">JFS</span>
+    {navItems.map(item => (
+      <a
+        href={item.href}
+        class="px-3 py-1.5 text-xs font-medium text-[var(--color-primary-dark)]/70 hover:text-[var(--color-primary-dark)] hover:bg-[var(--color-surface)] rounded-full transition-colors"
+      >
+        {item.label}
+      </a>
+    ))}
+  </nav>
+</header>
+
+<!-- Mobile hamburger menu -->
+<div
+  id="mobile-menu-overlay"
+  class="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"
+>
+  <nav class="absolute top-16 left-4 right-4 bg-white rounded-2xl shadow-2xl p-6 flex flex-col gap-3">
+    {navItems.map(item => (
+      <a
+        href={item.href}
+        class="mobile-nav-link text-base font-medium text-[var(--color-primary-dark)] py-2 px-4 rounded-lg hover:bg-[var(--color-surface)] transition-colors"
+      >
+        {item.label}
+      </a>
+    ))}
+  </nav>
+</div>
+
+<button
+  id="mobile-menu-btn"
+  class="fixed top-4 right-4 z-50 w-10 h-10 rounded-full bg-white/90 backdrop-blur-md shadow-lg border border-[var(--color-primary-light)]/30 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 sm:hidden"
+  aria-label="Menu"
+>
+  <svg class="w-5 h-5 text-[var(--color-primary-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+</button>
+
+<script>
+  const nav = document.getElementById('floating-nav');
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const overlay = document.getElementById('mobile-menu-overlay');
+
+  let menuOpen = false;
+
+  window.addEventListener('scroll', () => {
+    const show = window.scrollY > 400;
+    if (nav) {
+      nav.style.opacity = show ? '1' : '0';
+      nav.style.pointerEvents = show ? 'auto' : 'none';
+    }
+    if (mobileBtn) {
+      mobileBtn.style.opacity = show ? '1' : '0';
+      mobileBtn.style.pointerEvents = show ? 'auto' : 'none';
+    }
+  });
+
+  mobileBtn?.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    if (overlay) {
+      overlay.style.opacity = menuOpen ? '1' : '0';
+      overlay.style.pointerEvents = menuOpen ? 'auto' : 'none';
+    }
+  });
+
+  overlay?.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).classList.contains('mobile-nav-link') || e.target === overlay) {
+      menuOpen = false;
+      overlay.style.opacity = '0';
+      overlay.style.pointerEvents = 'none';
+    }
+  });
+
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      menuOpen = false;
+      if (overlay) {
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+      }
+    });
+  });
+</script>

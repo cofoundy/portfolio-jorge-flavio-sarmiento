@@ -1,0 +1,46 @@
+---
+import { siteConfig } from "../config";
+---
+
+<section id="education" class="py-20 px-6" style={`background-color: var(--color-surface)`}>
+  <div class="max-w-5xl mx-auto">
+    <h2 class="reveal text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-primary)] mb-3">Education</h2>
+    <p class="reveal stagger-1 text-sm text-[var(--color-primary-dark)]/60 mb-10">All degrees from University of Central Florida, Orlando, FL</p>
+
+    <!-- Stacked Degree Cards -->
+    <div class="space-y-4">
+      {siteConfig.education.map((edu, i) => (
+        <div class={`reveal stagger-${i + 2} card-hover p-6 rounded-xl bg-white border border-[var(--color-primary-light)]/20 shadow-sm`}>
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+            <div>
+              <h3 class="text-lg font-bold text-[var(--color-primary-dark)]">{edu.degree}</h3>
+              {edu.note && (
+                <p class="text-sm text-[var(--color-primary)]/80 mt-1 leading-relaxed max-w-xl">{edu.note}</p>
+              )}
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <span class="font-mono-numbers text-sm font-semibold text-[var(--color-primary-dark)]/70">GPA {edu.gpa}</span>
+              <span class="font-mono-numbers text-sm text-[var(--color-primary-dark)]/50">{edu.year}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Certifications -->
+    <div class="reveal mt-12 pt-8 border-t border-[var(--color-primary-light)]/20">
+      <h3 class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-primary-dark)]/40 mb-4">Certifications</h3>
+      <div class="flex flex-wrap gap-3">
+        {siteConfig.certifications.map(cert => (
+          <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-[var(--color-primary-light)]/20 shadow-sm">
+            <svg class="w-4 h-4 text-[var(--color-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-sm font-medium text-[var(--color-primary-dark)]">{cert.name}</span>
+            <span class="text-xs text-[var(--color-primary-dark)]/40">({cert.year})</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

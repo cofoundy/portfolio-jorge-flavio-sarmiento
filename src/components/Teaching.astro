@@ -1,0 +1,47 @@
+---
+import { siteConfig } from "../config";
+---
+
+<section id="teaching" class="py-20 px-6" style={`background-color: var(--color-surface)`}>
+  <div class="max-w-5xl mx-auto">
+    <h2 class="reveal text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-primary)] mb-3">Teaching</h2>
+
+    <!-- Teaching Metrics -->
+    <div class="reveal stagger-1 mt-8 flex flex-wrap justify-center md:justify-start gap-8 md:gap-12">
+      {siteConfig.teaching.metrics.map((metric, i) => (
+        <div class="text-center md:text-left">
+          <div class={`font-mono-numbers text-3xl md:text-4xl font-bold text-[var(--color-primary-dark)] stat-number`} style={`animation-delay: ${0.5 + i * 0.15}s`}>
+            {metric.value}
+          </div>
+          <div class="mt-1 text-sm text-[var(--color-primary-dark)]/60 font-medium">
+            {metric.label}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Award Highlight -->
+    <div class="reveal stagger-2 mt-10 p-5 rounded-xl bg-white border border-[var(--color-primary-light)]/30 shadow-sm max-w-xl">
+      <div class="flex items-start gap-3">
+        <div class="w-10 h-10 rounded-full bg-[var(--color-primary)]/10 flex items-center justify-center shrink-0 mt-0.5">
+          <svg class="w-5 h-5 text-[var(--color-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+          </svg>
+        </div>
+        <div>
+          <p class="text-sm font-bold text-[var(--color-primary-dark)]">{siteConfig.teaching.highlight}</p>
+          <p class="text-xs text-[var(--color-primary-dark)]/50 mt-1">College of Engineering and Computer Science</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Courses Grid -->
+    <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3">
+      {siteConfig.teaching.courses.map((course, i) => (
+        <div class={`reveal stagger-${i + 3} text-center py-4 px-3 rounded-lg bg-white border border-[var(--color-primary-light)]/20 shadow-sm`}>
+          <p class="text-sm font-semibold text-[var(--color-primary-dark)]">{course}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

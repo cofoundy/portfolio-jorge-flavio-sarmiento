@@ -1,0 +1,22 @@
+---
+import { siteConfig } from "../config";
+---
+
+<section id="about" class="py-20 px-6" style="background-color: white">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="reveal text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-primary)] mb-3">About</h2>
+    <p class="reveal stagger-1 text-lg md:text-xl text-[var(--color-primary-dark)]/80 leading-relaxed max-w-3xl">
+      {siteConfig.about.intro}
+    </p>
+
+    <!-- Three Pillars -->
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+      {siteConfig.about.pillars.map((pillar, i) => (
+        <div class={`reveal stagger-${i + 2} card-hover p-6 rounded-xl border border-[var(--color-primary-light)]/30 bg-[var(--color-surface-light)]`}>
+          <h3 class="text-base font-bold text-[var(--color-primary-dark)] mb-2">{pillar.title}</h3>
+          <p class="text-sm text-[var(--color-primary-dark)]/70 leading-relaxed">{pillar.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
